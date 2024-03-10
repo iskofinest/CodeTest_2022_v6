@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\Log;
 
 class TeHelper
 {
-    public static function fetchLanguageFromJobId($id)
-    {
-        $language = Language::findOrFail($id);
-        return $language1 = $language->language;
+    public static function fetchLanguageFromJobId($id) {
+        return Language::findOrFail($id)->language ?? null;
     }
 
     public static function getUsermeta($user_id, $key = false)

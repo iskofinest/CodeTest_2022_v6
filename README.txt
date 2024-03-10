@@ -1,45 +1,18 @@
-Do at least ONE of the following tasks: refactor is mandatory. Write tests is optional, will be good bonus to see it. 
-Please do not invest more than 2-4 hours on this.
-Upload your results to a Github repo, for easier sharing and reviewing.
+As I reading lines of codes for less than 2 hours, BookingRepository.php is a controller class for CRUD operation in Jobs per User. I assume that this is a piece of code from a running app with an old php version I think like version 5.
+I admire the code because it is built to do a complex task such as language translation and email notification to user. The code looks good but there are some aspects missed to implement in the application.
+Aspect Separation – BookingRepository class is too crowded because it also contains some aspect that can be extracted to other class that can also used by other class.
+Request Layer: Since validation happens on the repository, the API already accepts the request before it was actually validated. Validating request before proceeding to the core logic can mitigate the server from unnecessary processing that can lead to server breakdown.
+Redundancy: I saw some code repetition on the booking repository that contributes to the reduction of readability.
+Code Formatting: longer code can be located into a new line for the sake of readability and maintainability
 
-Thank you and good luck!
+ because core business logic was placed in a repository class to separate it on the controller which is a good practice in creating every app. There is also some code redundancy in the BookingRepository that contributes to the longer line of codes.
+However, on the repository class, there were a bunch of codes that is too crowded makes it not readable and I also think very hard to maintain. On the concept of separation of concern, many aspect can extract to the repository such as Data Accessing, Logging, validation, etc. so that only the core business logic concern will be put on the repository.
+I also noticed that some of the Laravel framework features was not used such as Form Request, Route Model Binding, traits and many more that if properly utilized, there will be an ease of code reading and app maintenance.
 
+On BookingRepository::store function, I used Form request to separate the request validation part to the business logic. In this way, the validation part will happen on request layer rather than the API accepts the request before it validates. Laravel Framework also has built-in features when using Form Request since it automatically throws error messages relevant to the request validation.
+On BookingRepository::bookingExpireNoAccepted, I maximized using eloquent model for querying the data since it can be a concise approach and aligning with the established relationship on the Eloquent Model as ORM.
+I also wanted to separate the logging and Data Accessing part to reduce lines of code in the repository.
+I also used updated PHP version syntax because it makes the code simplier and maintainable.
 
-
-Code to refactor
-=================
-1) app/Http/Controllers/BookingController.php
-2) app/Repository/BookingRepository.php
-
-Code to write tests (optional)
-=====================
-3) App/Helpers/TeHelper.php method willExpireAt
-4) App/Repository/UserRepository.php, method createOrUpdate
-
-
-----------------------------
-
-What I expect in your repo:
-
-X. A readme with:   Your thoughts about the code. What makes it amazing code. Or what makes it ok code. Or what makes it terrible code. How would you have done it. Thoughts on formatting, structure, logic.. The more details that you can provide about the code (what's terrible about it or/and what is good about it) the easier for us to assess your coding style, mentality etc
-
-And 
-
-Y.  Refactor it if you feel it needs refactoring. The more love you put into it. The easier for us to asses your thoughts, code principles etc
-
-
-IMPORTANT: Make two commits. First commit with original code. Second with your refactor so we can easily trace changes. 
-
-
-NB: you do not need to set up the code on local and make the web app run. It will not run as its not a complete web app. This is purely to assess you thoughts about code, formatting, logic etc
-
-
-===== So expected output is a GitHub link with either =====
-
-1. Readme described above (point X above) + refactored code 
-OR
-2. Readme described above (point X above) + refactored core + a unit test of the code that we have sent
-
-Thank you!
-
-
+I didn’t manage to refactor all the code because of lack of time.
+There are a lot of improvements that can be done into the code to make it a better app.
